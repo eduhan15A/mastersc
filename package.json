@@ -1,0 +1,24 @@
+{
+  "name": "webnodechiquitin",
+  "version": "1.0.0",
+  "description": "Primer servidor Node Chiquitin",
+  "main": "servidorexp.js",
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node server.js",
+    "develop": "nodemon servidorexp.js --exclude=*.php"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ramelp/mastersc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ramelp/mastersc/issues"
+  },
+  "homepage": "https://github.com/ramelp/mastersc#readme"
+}

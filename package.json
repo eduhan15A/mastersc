@@ -4,12 +4,13 @@
   "description": "Primer servidor Node Chiquitin",
   "main": "servidorexp.js",
   "dependencies": {
+    "ejs": "^2.5.7",
     "express": "^4.16.2"
   },
   "devDependencies": {},
   "scripts": {
     "start": "node server.js",
-    "develop": "nodemon servidorexp.js --exclude=*.php"
+    "dev": "nodemon servidorexp.js --exclude=*.php"
   },
   "repository": {
     "type": "git",

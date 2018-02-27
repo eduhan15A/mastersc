@@ -19,17 +19,38 @@
          <p class="center white">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
     
     </div>
-         
+           <script>
+            $(function () {
+                /*$('#send').on('click', function () {
+                 event.preventDefault();
+                 console.log('sending');
+                 $.ajax({
+                 url: '/postdata',
+                 cache: false
+                 }).done(function (data) {
+                 console.log(data);
+                 }).fail(function (a, b, c) {
+                 console.log(a, b, c);
+                 });
+                 });*/
+            });
+        </script>
        <div class="two-thirds column form">
-                 <form action="#" id="commentForm" method="post" name="commentForm">
-                       <input class="required name" id="name" name="name" type="text" value="Name*" onFocus="if(this.value=='Name*') this.value=''"/>
-                       <input class="required email" id="email" name="email" type="text" value="Email*" onFocus="if(this.value=='Email*') this.value=''"/>
-                       <input class="phone" id="phone" name="phone" type="text" value="Phone" onFocus="if(this.value=='Phone') this.value=''"/>
-                       <input class="website" id="website" name="website" type="text" value="Website" onFocus="if(this.value=='Website') this.value=''"/>
-                       <textarea class="required message" name="message" onFocus="if(this.value=='Message*') this.value=''">Message*</textarea>
-                       <button class="btn">Send</button>
-                       <p class="white">Required fields are marked *</p>
-                  </form>
+                 <form action="/postContactData" id="commentForm" method="post" name="commentForm" enctype="multipart/form-data">
+                <input class="required name" id="name" name="name" type="text" value="Name*" onFocus="if (this.value == 'Name*')
+                            this.value = ''"/>
+                <input class="required email" id="email" name="email" type="text" value="Email*" onFocus="if (this.value == 'Email*')
+                            this.value = ''"/>
+                <input class="phone" id="phone" name="phone" type="text" value="Phone" onFocus="if (this.value == 'Phone')
+                            this.value = ''"/>
+                <input class="website" id="website" name="website" type="text" value="Website" onFocus="if (this.value == 'Website')
+                            this.value = ''"/>
+                <textarea class="required message" name="message" onFocus="if (this.value == 'Message*')
+                            this.value = ''">Message*</textarea>
+                <input type="file" name="archivo">
+                <button class="btn" id="send">Send</button>
+                <p class="white">Required fields are marked *</p>
+            </form>
        </div>
        
        <div class="one-third column omega coninfo">

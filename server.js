@@ -1,5 +1,6 @@
 const protocol = require('http');
-const hostname = '127.0.0.1';
+//const hostname = '127.0.0.1';
+const hostname = 'https://mastersc.herokuapp.com/';
 const port = 80;
 
 const server = protocol.createServer((req, response) => {

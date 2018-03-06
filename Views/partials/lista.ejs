@@ -1,39 +1,53 @@
-<div class="container">
-    <div class="row col-md-12">
-        <table class="table table-responsive table-bordered table-striped table-hover">
-            <tr align="center">
-                <th align="center">
-                    <span class="alert alert-info">Imagen</span>
-                </th>
-                <th>
-                    <span class="alert alert-info">Nombre</span>
-                </th>
-                <th>
-                    <span class="alert alert-info">EMail</span>
-                </th>
-                <th>
-                    <span class="alert alert-info">Telefono</span>
-                </th>
-                <th>
-                    <span class="alert alert-info">Website</span>
-                </th>
-                <th>
-                    <span class="alert alert-info">Mensaje</span>
-                </th>
-                <th></th>
-            </tr>
-            <tr>
-                <td><img src="archivos/1519357861717.jpg" height="300" width="300" /></td>
-                <td>Alex Lora</td>
-                <td>edwardoluhan@gmail.com</td>
-                <td>123123122</td>
-                <td></td>
-                <td></td>
-                <td><button class="form-control btn btn-default">Revisado</button></td>
-            </tr>
+<style>
+    .container {
+        width: 100%;
+    }
 
-        </table>
+    .vertical-center {
+        min-height: 100%;
+        /* Fallback for browsers do NOT support vh unit */
+        min-height: 100;
+        /* These two lines are counted as one :-)       */
+        display: flex;
+        align-items: center;
+    }
 
+</style>
+<div class="container text-center">
+    <div class="row">
+        <div class="col-md-2 alert alert-info">Imagen</div>
+        <div class="col-md-1 alert alert-warning">Nombre</div>
+        <div class="col-md-2 alert alert-danger">e-mail</div>
+        <div class="col-md-1 alert alert-success">Telefono</div>
+        <div class="col-md-2 alert alert-info ">Website</div>
+        <div class="col-md-2 alert alert-warning">Mensaje</div>
+        <div class="col-md-2 alert alert-info">Revisado</div>
     </div>
+    <% contactos.forEach(function(contacto){%>
+        <div class="row text-center ">
+            <% var obj = JSON.parse( JSON.stringify(contacto)); %>
+
+                <div class="col-md-2 table-bordered">
+                    <img class='img-fluid' src='archivos/<%=obj.Imagen %>' />
+                </div>
+                <div class="col-md-1 table-bordered vertical-center">
+                    <%= obj.Nombre %>
+                </div>
+                <div class="col-md-2 table-bordered vertical-center">
+                    <%= obj.Email %>
+                </div>
+                <div class="col-md-1 table-bordered vertical-center">
+                    <%= obj.Tel %>
+                </div>
+                <div class="col-md-2 table-bordered vertical-center">
+                    <%= obj.Website %>
+                </div>
+                <div class="col-md-2 table-bordered vertical-center">
+                    <%= obj.Mensaje %>
+                </div>
+                <div class="col-md-2 table-bordered vertical-center"><button class="form-control btn btn-default ">Revisado</button>
+                </div>
+        </div>
+        <% });%>
 </div>
-<script src="js/jquery.js"></script>
+<script src="js/jquery.js "></script>

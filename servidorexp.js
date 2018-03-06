@@ -1,43 +1,53 @@
-const expressLib = require ("express");
+const expressLib = require("express");
 const parser = require('body-parser');
 const multiparty = require('multiparty');
 const fs = require('fs');
 const port = 3001;
 var app = expressLib();
-var path    = require("path");
+var path = require("path");
 const plantilla = require("ejs");
-
-//app.use(expressLib.static("public"));
-//app.use(app.router);
-//app.use(expressLib.static(path.join(__dirname, 'public')));
+const connectMysql = require("./Services/db_Connect_Mysql");
 
 app.use(expressLib.static('public'))
 app.use(expressLib.static('Views'))
-app.set("view engine","ejs");
+app.set("view engine", "ejs");
 
 
-app.get('*', (req,response)=>{
-//response.send('Hola Chiquitín');
- //response.sendFile(path.join(__dirname+'/index.html'));
-//response.sendFile(path.join(__dirname+'../views/index.ejs'));
 
-		response.render("page", { data: req.url });
-		//response.render("contacto")
+app.get('/lista', (req, res) => {
+    var obj = {};
+    connectMysql.query('SELECT * FROM Contactos', function (err, result) {
+        if (err) {
+            throw err;
+        } else {
+            res.render("page", {
+                data: req.url,
+                contactos: result
+            });
+        }
+
+    });
 
 });
-//app.get('/contacto', (req,response)=>{
-	//	response.render("contacto")
-//});
+
+app.get('*', (req, response) => {
+
+    response.render("page", {
+        data: req.url
+    });
+});
 
 app.post('/postContactData', (req, res) => {
-    var form = new multiparty.Form(); 
-    var data = {data: {}};
+    var form = new multiparty.Form();
+    var data = {
+        data: {}
+    };
 
     form.parse(req, function (err, fields, files) {
         if (err) {
             console.log(err);
             data.data.err = err;
-            res.render("postdata2", data); 
+            res.render("postdata2", data);
             return;
         }
 
@@ -82,6 +92,10 @@ app.post('/postContactData', (req, res) => {
                 console.log('Temporal file ' + files['archivo'][0].path + ' was deleted');
             }
         });
+
+
+        connectMysql.connect();
+
 
         res.render("postContactData", data);
     });

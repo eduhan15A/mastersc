@@ -6,7 +6,7 @@ const port = 3001;
 var app = expressLib();
 var path = require("path");
 const plantilla = require("ejs");
-const connectMysql = require("./Services/db_Connect_Mysql");
+//const connectMysql = require("./Services/db_Connect_Mysql");
 
 app.use(expressLib.static('public'))
 app.use(expressLib.static('Views'))
@@ -14,7 +14,7 @@ app.set("view engine", "ejs");
 
 
 
-app.get('/lista', (req, res) => {
+/*app.get('/lista', (req, res) => {
     var obj = {};
     connectMysql.query('SELECT * FROM Contactos', function (err, result) {
         if (err) {
@@ -28,7 +28,7 @@ app.get('/lista', (req, res) => {
 
     });
 
-});
+});*/
 
 app.get('*', (req, response) => {
 

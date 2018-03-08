@@ -11,6 +11,7 @@ const plantilla = require("ejs");
 
 app.use(expressLib.static(__dirname + '/public'))
 app.use(expressLib.static(__dirname + '/Views'))
+app.set('views', __dirname + '/Views');
 app.set("view engine", "ejs");
 
 /*app.get('/lista', (req, res) => {

@@ -13,8 +13,6 @@ app.use(expressLib.static('public'))
 app.use(expressLib.static('Views'))
 app.set("view engine", "ejs");
 
-
-
 /*app.get('/lista', (req, res) => {
     var obj = {};
     connectMysql.query('SELECT * FROM Contactos', function (err, result) {

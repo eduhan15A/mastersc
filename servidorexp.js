@@ -9,8 +9,8 @@ var path = require("path");
 const plantilla = require("ejs");
 //const connectMysql = require("./Services/db_Connect_Mysql");
 
-app.use(expressLib.static('./public'))
-app.use(expressLib.static('./Views'))
+app.use(expressLib.static(__dirname + '/public'))
+app.use(expressLib.static(__dirname + '/Views'))
 app.set("view engine", "ejs");
 
 /*app.get('/lista', (req, res) => {

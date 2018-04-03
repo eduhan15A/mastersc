@@ -3,16 +3,39 @@ const parser = require('body-parser');
 const multiparty = require('multiparty');
 const fs = require('fs');
 //const port = 3001;
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 3001
 var app = expressLib();
 var path = require("path");
 const plantilla = require("ejs");
-//const connectMysql = require("./Services/db_Connect_Mysql");
+const conekta = require("conekta")
+const mongoose = require('mongoose')
+mongoose.connect("mongodb://localhost/mastersc")
+
+contact = new mongoose.Schema({
+    nombre: String,
+    email: String,
+    tel: String,
+    website: String,
+    mensaje: String,
+    imagen: String
+}, {
+    collection: 'contacto'
+});
+
+var contact = mongoose.model('contact', contact);
+
+
+
+conekta.api_key = 'key_ZxvvZN5xKq9Nktf7QUMfvg';
+conekta.locale = 'es';
+conekta.api_version = "2.0.0";
+const connectMysql = require("./Services/db_Connect_Mysql");
 
 app.use(expressLib.static(__dirname + '/public'))
 app.use(expressLib.static(__dirname + '/Views'))
 app.set('views', __dirname + '/Views');
 app.set("view engine", "ejs");
+
 
 /*app.get('/lista', (req, res) => {
     var obj = {};
@@ -75,6 +98,7 @@ app.post('/postContactData', (req, res) => {
         //Build up info file
         var info = '';
         for (var i in fields) {
+            console.log(fields[i]);
             data.data[i] = fields[i];
             info += i + ' : ' + fields[i] + '\n';
         }
@@ -90,12 +114,50 @@ app.post('/postContactData', (req, res) => {
                 console.warn(err, ' File not deleted: ' + files['archivo'][0].path);
             } else {
                 console.log('Temporal file ' + files['archivo'][0].path + ' was deleted');
+                console.log('Price ' + fields["monto"])
+
             }
         });
 
 
-        connectMysql.connect();
+        //  connectMysql.connect();
 
+        var schemaAux = {
+            nombre: data.data["name"],
+            email: data.data["email"],
+            tel: data.data["phone"],
+            website: data.data["website"],
+            mensaje: data.data["message"],
+            imagen: data.data.file
+        };
+
+        var contacto = new contact(schemaAux);
+        contacto.save(function (err) {
+            console.log(contacto);
+        });
+
+        /*  conekta.Order.create({
+              "currency": "MXN",
+              "customer_info": {
+                  "name": "Eduardo",
+                  "phone": "4131094552",
+                  "email": "edwardoluhan@gmail.com"
+              },
+              "line_items": [{
+                  "name": "Mac Book Air",
+                  "description": "Air version.",
+                  "unit_price": Number(fields["monto"]),
+                  "quantity": 1,
+                  "tags": ["Mac book", "Air"],
+                  "type": "physical"
+                      }]
+          }, function (err, res) {
+              if (err) {
+                  console.log(err.type);
+                  return;
+              }
+              console.log(res.toObject());
+          });*/
 
         res.render("postContactData", data);
     });
